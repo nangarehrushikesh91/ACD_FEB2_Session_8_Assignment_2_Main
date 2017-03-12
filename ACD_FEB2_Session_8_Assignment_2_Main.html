@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<head>
+	<title>ACD_FEB2_Session_8_Assignment_2_Main</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+</head>
+<body>
+<center><h1>MySelfie Tech</h1></center>
+
+<center>
+	<div id="signUpForm">
+		<b>SignUp</b><br/>
+		<input type="text" id="name" placeholder="Name"/><br/>
+		<input type="email" id="email" placeholder="Email"/><br/>
+		<input type="password" id="password" placeholder="Password"/><br/>
+		<input type="submit" id="signUp" value="Submit Query"/><br/><br/>
+		<input type="button" id="showLoginForm" value="Back" style="margin-left: 130px;"/>
+	</div>
+</center>
+
+<center>
+	<div id="loginForm">
+		<b>Login</b><br/>
+		<input type="email" id="loginEmail" placeholder="Email"/><br/>
+		<input type="password" id="loginPassword" placeholder="Password"/><br/>
+		<input type="submit" id="login" value="Submit Query"/><br/><br/>
+		<input type="button" id="loginBack" value="Back" style="margin-left: 130px;"/><br/><br/>
+	</div>
+</center>
+
+<center>
+	<div id="loggedIn">
+		<p>Welcome to <script>document.write(localStorage.getItem('name'));</script></p>
+		<input type="button" id="logout" value="logout" style="margin-left: 100px;"/>
+	</div>
+</center>
+
+<center>
+	<div id="notLoggedIn">
+		<p>user or password is incorrect</p>
+	</div>
+</center>
+
+<center>
+	<input type="button" id="loginFormShow" value="Login"/>
+	<input type="button" id="signUpFormShow" value="SignUp"/>
+</center>
+
+</body>
+
+<script>
+$(document).ready(function(){
+	//alert("Hello");
+	$('#signUpForm').hide();
+	$('#loginForm').hide();
+	$('#loggedIn').hide();
+	$('#notLoggedIn').hide();
+});
+
+$("#signUpFormShow").click(function(){
+	$("#signUpForm").show();
+	$("#loginFormShow").hide();
+	$("#signUpFormShow").hide();
+});
+
+$("#signUp").click(function(){
+	var name = $('#name').val();
+	localStorage.setItem('name', name);
+	var email = $('#email').val();
+	localStorage.setItem('email',email);
+	var password = $('#password').val();
+	localStorage.setItem('password',password);
+	
+	if(name && email && password)
+	{
+		alert("Registered Successfully");
+		$('#name').val("");
+		$('#email').val("");
+		$('#password').val("");
+	}
+});
+
+$("#showLoginForm").click(function(){
+	$("#signUpForm").hide();
+	$("#loginFormShow").hide();
+	$("#signUpFormShow").hide();
+	$('#loginForm').show();
+});
+
+$("#login").click(function(){
+	var email = $('#loginEmail').val();
+	var password = $('#loginPassword').val();
+	$('#notLoggedIn').hide();
+	$('#loggedIn').hide();
+	
+	if(email == localStorage.getItem('email') && password == localStorage.getItem('password'))
+	{
+		$('#loginForm').hide();
+		$('#loggedIn').show();
+	}
+	else
+	{
+		$('#notLoggedIn').show();
+	}
+});
+
+$('#logout').click(function(){
+	$('#loginEmail').val("");
+	$('#loginPassword').val("");
+	$('#logout').show();
+	$('#loginForm').show();
+	$('#notLoggedIn').hide();
+	$('#loggedIn').hide();
+});
+
+$('#loginFormShow').click(function(){
+	$("#loginFormShow").hide();
+	$("#signUpFormShow").hide();
+	$('#loginForm').show();
+});
+
+
+$('#loginBack').click(function(){
+	$('#loginEmail').val("");
+	$('#loginPassword').val("");
+	$("#loginForm").hide();
+	$("#notLoggedIn").hide();
+	$("#loginFormShow").show();
+	$("#signUpFormShow").show();
+});
+</script>
+</html>
+
